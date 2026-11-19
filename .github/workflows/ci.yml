@@ -18,14 +18,5 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Setup Kotlin
-        run: |
-          curl -s https://get.sdkman.io | bash
-          source "$HOME/.sdkman/bin/sdkman-init.sh"
-          sdk install kotlin
-
-      - name: Build JAR
-        run: kotlinc src/Main.kt -include-runtime -d app.jar
-
-      - name: Run application
-        run: java -jar app.jar
+      - name: Build and test
+        run: ./gradlew clean test
