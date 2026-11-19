@@ -1,0 +1,86 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+
+package "Entry Point" {
+  [GameApplication]
+  [Console Main]
+  [GUI Main]
+}
+
+package "Presentation" {
+  package "Console" {
+    [ConsoleUI]
+    [GameConsoleMenu]
+    [GamePlayConsole]
+  }
+  package "GUI (Swing)" {
+    [MainWindow]
+    [Player Management]
+    [Game Setup]
+    [Game Board]
+    [Statistics]
+    [Game History]
+  }
+}
+
+package "Application" {
+  [PlayerService]
+  [GameService]
+  [StatisticsService]
+  [Player DTOs]
+  [Game View DTOs]
+  interface PlayerRepository
+  interface GameRepository
+  interface GameContentProvider
+}
+
+package "Domain" {
+  [Player]
+  [Game]
+  [GameFactory]
+  [MoveValidator]
+  [Game State]
+}
+
+package "Infrastructure" {
+  [InMemoryPlayerRepository]
+  [InMemoryGameRepository]
+  [DefaultGameContentProvider]
+}
+
+[Console Main] --> [GameApplication]
+[GUI Main] --> [GameApplication]
+[GameApplication] --> [ConsoleUI]
+[GameApplication] --> [MainWindow]
+[ConsoleUI] --> [PlayerService]
+[GameConsoleMenu] --> [GameService]
+[GamePlayConsole] --> [GameService]
+[MainWindow] --> [PlayerService]
+[MainWindow] --> [GameService]
+[MainWindow] --> [StatisticsService]
+[Player Management] --> [PlayerService]
+[Game Setup] --> [GameService]
+[Game Board] --> [GameService]
+[Statistics] --> [StatisticsService]
+[Game History] --> [GameService]
+[PlayerService] --> [PlayerRepository]
+[GameService] --> [PlayerRepository]
+[GameService] --> [GameRepository]
+[GameService] --> [GameContentProvider]
+[StatisticsService] --> [PlayerRepository]
+[StatisticsService] --> [GameRepository]
+[PlayerService] --> [Player]
+[GameService] --> [GameFactory]
+[GameFactory] --> [Game]
+[Game] --> [MoveValidator]
+[InMemoryPlayerRepository] ..|> [PlayerRepository]
+[InMemoryGameRepository] ..|> [GameRepository]
+[DefaultGameContentProvider] ..|> [GameContentProvider]
+
+note right of [MainWindow]
+GUI depends on Application only.
+No GUI dependency on Domain or Infrastructure.
+end note
+@enduml
