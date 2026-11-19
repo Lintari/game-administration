@@ -1,6 +1,7 @@
 package splendor.application.services
 
 import splendor.application.dto.PlayerInfo
+import splendor.application.dto.PlayerView
 import splendor.application.repositories.PlayerRepository
 import splendor.domain.identifiers.PlayerId
 import splendor.domain.players.Player
@@ -26,6 +27,10 @@ class PlayerService(
 
     fun getAllPlayers(): List<PlayerInfo> {
         return playerRepository.findAll().map { it.toPlayerInfo() }
+    }
+
+    fun getPlayerViews(): List<PlayerView> = playerRepository.findAll().map {
+        PlayerView(id = it.id.value.toString(), nickname = it.nickname)
     }
 
     private fun Player.toPlayerInfo() = PlayerInfo(

@@ -28,3 +28,10 @@ tasks.test {
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
 }
+
+tasks.register<JavaExec>("runGui") {
+    group = "application"
+    description = "Runs the Splendor graphical interface"
+    classpath = sourceSets["main"].runtimeClasspath
+    mainClass.set("splendor.entrypoint.GuiMainKt")
+}
