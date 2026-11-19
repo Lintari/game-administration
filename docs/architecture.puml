@@ -34,6 +34,7 @@ package "Application" {
   interface PlayerRepository
   interface GameRepository
   interface GameContentProvider
+  interface PlayerStatisticsRepository
 }
 
 package "Domain" {
@@ -48,12 +49,17 @@ package "Infrastructure" {
   [InMemoryPlayerRepository]
   [InMemoryGameRepository]
   [DefaultGameContentProvider]
+  [SqliteDatabase]
+  [SqlitePlayerRepository]
+  [SqliteGameRepository]
+  [SqlitePlayerStatisticsRepository]
 }
 
 [Console Main] --> [GameApplication]
 [GUI Main] --> [GameApplication]
 [GameApplication] --> [ConsoleUI]
 [GameApplication] --> [MainWindow]
+[GameApplication] --> [SqliteDatabase]
 [ConsoleUI] --> [PlayerService]
 [GameConsoleMenu] --> [GameService]
 [GamePlayConsole] --> [GameService]
@@ -71,6 +77,7 @@ package "Infrastructure" {
 [GameService] --> [GameContentProvider]
 [StatisticsService] --> [PlayerRepository]
 [StatisticsService] --> [GameRepository]
+[StatisticsService] --> [PlayerStatisticsRepository]
 [PlayerService] --> [Player]
 [GameService] --> [GameFactory]
 [GameFactory] --> [Game]
@@ -78,6 +85,13 @@ package "Infrastructure" {
 [InMemoryPlayerRepository] ..|> [PlayerRepository]
 [InMemoryGameRepository] ..|> [GameRepository]
 [DefaultGameContentProvider] ..|> [GameContentProvider]
+[SqlitePlayerRepository] ..|> [PlayerRepository]
+[SqliteGameRepository] ..|> [GameRepository]
+[SqlitePlayerStatisticsRepository] ..|> [PlayerStatisticsRepository]
+[SqlitePlayerRepository] --> [SqliteDatabase]
+[SqliteGameRepository] --> [SqliteDatabase]
+[SqlitePlayerStatisticsRepository] --> [SqliteDatabase]
+[SqliteDatabase] --> [SQLite file database]
 
 note right of [MainWindow]
 GUI depends on Application only.

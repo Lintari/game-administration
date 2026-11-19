@@ -14,12 +14,14 @@ import java.util.UUID
 
 class GamePlayConsole(
     private val input: ConsoleInput,
-    private val output: ConsoleOutput
+    private val output: ConsoleOutput,
+    private val onGameChanged: (Game) -> Unit = {}
 ) {
 
     fun play(game: Game) {
         if (game.status == GameStatus.NOT_STARTED) {
             game.start()
+            onGameChanged(game)
         }
 
         if (game.status != GameStatus.IN_PROGRESS) {
@@ -71,7 +73,10 @@ class GamePlayConsole(
         } ?: return
 
         when (val result = game.submitMove(move)) {
-            MoveResult.Accepted -> output.showLine("Move accepted!")
+            MoveResult.Accepted -> {
+                onGameChanged(game)
+                output.showLine("Move accepted!")
+            }
             is MoveResult.Rejected -> {
                 output.showLine("Move rejected: ${result.reason}")
             }
@@ -187,6 +192,7 @@ class GamePlayConsole(
             }
 
             if (game.returnTokens(color, amount)) {
+                onGameChanged(game)
                 output.showLine("Returned $amount ${color.name} token(s).")
             } else {
                 output.showLine("Cannot return these tokens.")
@@ -222,6 +228,7 @@ class GamePlayConsole(
         val noble = eligibleNobles[choice - 1]
 
         if (game.selectNoble(noble.id)) {
+            onGameChanged(game)
             output.showLine("Noble acquired!")
         } else {
             output.showLine("Could not acquire this noble.")

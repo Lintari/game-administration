@@ -13,10 +13,9 @@ class Game(
     participants: List<GameParticipant>,
     val table: Table,
     private val moveValidator: MoveValidator = MoveValidator(),
-    private val moveHistory: MoveHistory = MoveHistory()
-) {
+    private val moveHistory: MoveHistory = MoveHistory(),
     val id: GameId = GameId.generate()
-
+) {
     private val participants = participants.toList()
 
     var status: GameStatus = GameStatus.NOT_STARTED
@@ -65,6 +64,12 @@ class Game(
 
     fun getMoveHistory(): List<MoveRecord> =
         moveHistory.getAll()
+
+    internal fun persistenceCurrentIndex(): Int = currentIndex
+
+    internal fun persistenceFinalRoundPlayerId(): PlayerId? = finalRoundPlayerId
+
+    internal fun persistenceTurnContext(): TurnContext? = turnContext
 
     fun getWinners(): List<GameParticipant> = winners.toList()
 
@@ -372,6 +377,34 @@ class Game(
     }
 
     companion object {
+        fun restore(
+            id: GameId,
+            participants: List<GameParticipant>,
+            table: Table,
+            status: GameStatus,
+            currentIndex: Int,
+            finalRoundPlayerId: PlayerId?,
+            turnContext: TurnContext?,
+            winners: List<GameParticipant>,
+            moveHistory: MoveHistory
+        ): Game {
+            val game = Game(
+                participants = participants,
+                table = table,
+                moveHistory = moveHistory,
+                id = id
+            )
+            require(currentIndex in participants.indices) {
+                "Current participant index is out of range"
+            }
+            game.status = status
+            game.currentIndex = currentIndex
+            game.finalRoundPlayerId = finalRoundPlayerId
+            game.turnContext = turnContext
+            game.winners = winners.toList()
+            return game
+        }
+
         const val MAX_PLAYER_TOKENS = 10
         const val PRESTIGE_TO_WIN = 15
     }

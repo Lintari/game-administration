@@ -62,6 +62,9 @@ class Table(
         return decks[level]?.remainingCount() ?: 0
     }
 
+    fun getDeckCards(level: CardLevel): List<DevelopmentCard> =
+        decks[level]?.getRemainingCards().orEmpty()
+
     fun findOpenCard(cardId: CardId): DevelopmentCard? {
         return openCards.values
             .asSequence()

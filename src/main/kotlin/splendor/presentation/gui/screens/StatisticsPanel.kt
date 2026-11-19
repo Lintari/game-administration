@@ -13,7 +13,7 @@ class StatisticsPanel(
     private val statisticsService: StatisticsService,
     private val onBack: () -> Unit
 ) : JPanel(BorderLayout(10, 10)) {
-    private val model = object : DefaultTableModel(arrayOf("Player", "Games played", "Wins", "Win rate"), 0) {
+    private val model = object : DefaultTableModel(arrayOf("Player", "Games played", "Wins", "Win rate", "Total points"), 0) {
         override fun isCellEditable(row: Int, column: Int) = false
     }
 
@@ -34,7 +34,7 @@ class StatisticsPanel(
     fun refresh() {
         model.rowCount = 0
         statisticsService.getPlayerStatistics().forEach {
-            model.addRow(arrayOf<Any>(it.nickname, it.gamesPlayed, it.wins, "%.1f%%".format(it.winPercentage)))
+            model.addRow(arrayOf<Any>(it.nickname, it.gamesPlayed, it.wins, "%.1f%%".format(it.winPercentage), it.totalPoints))
         }
     }
 }

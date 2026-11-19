@@ -5,8 +5,10 @@ import splendor.application.services.PlayerService
 import splendor.application.services.StatisticsService
 import splendor.domain.gamemodel.GameFactory
 import splendor.infrastructure.catalog.DefaultGameContentProvider
-import splendor.infrastructure.repositories.InMemoryGameRepository
-import splendor.infrastructure.repositories.InMemoryPlayerRepository
+import splendor.infrastructure.database.SqliteDatabase
+import splendor.infrastructure.repositories.SqliteGameRepository
+import splendor.infrastructure.repositories.SqlitePlayerRepository
+import splendor.infrastructure.repositories.SqlitePlayerStatisticsRepository
 import splendor.presentation.console.ConsoleInput
 import splendor.presentation.console.ConsoleOutput
 import splendor.presentation.console.ConsoleUI
@@ -17,8 +19,10 @@ import javax.swing.SwingUtilities
 
 class GameApplication {
 
-    private val playerRepository = InMemoryPlayerRepository()
-    private val gameRepository = InMemoryGameRepository()
+    private val database = SqliteDatabase()
+    private val playerRepository = SqlitePlayerRepository(database)
+    private val gameRepository = SqliteGameRepository(database)
+    private val statisticsRepository = SqlitePlayerStatisticsRepository(database)
     private val gameContentProvider = DefaultGameContentProvider()
 
     private val playerService = PlayerService(playerRepository)
@@ -28,14 +32,18 @@ class GameApplication {
         gameFactory = GameFactory(),
         contentProvider = gameContentProvider
     )
-    private val statisticsService = StatisticsService(playerRepository, gameRepository)
+    private val statisticsService = StatisticsService(
+        playerRepository,
+        gameRepository,
+        statisticsRepository
+    )
 
     private lateinit var ui: ConsoleUI
 
     private fun configureDependencies() {
         val input = ConsoleInput()
         val output = ConsoleOutput()
-        val gamePlayConsole = GamePlayConsole(input, output)
+        val gamePlayConsole = GamePlayConsole(input, output, gameService::saveProgress)
         val gameMenu = GameConsoleMenu(
             gameService = gameService,
             playerRepository = playerRepository,

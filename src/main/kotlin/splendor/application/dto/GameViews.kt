@@ -53,7 +53,8 @@ data class PlayerStatistics(
     val nickname: String,
     val gamesPlayed: Int,
     val wins: Int,
-    val winPercentage: Double
+    val winPercentage: Double,
+    val totalPoints: Int = 0
 )
 
 sealed interface GameCommand {

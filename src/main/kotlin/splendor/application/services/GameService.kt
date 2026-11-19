@@ -68,6 +68,8 @@ class GameService(
 
     fun getGame(id: GameId): Game? = gameRepository.findById(id)
 
+    fun saveProgress(game: Game) = gameRepository.save(game)
+
     fun getAllGames(): List<Game> = gameRepository.findAll()
 
     fun getGameViews(): List<GameView> =
@@ -140,6 +142,7 @@ class GameService(
             return GameActionResult(false, "Game has already started")
         }
         game.start()
+        gameRepository.save(game)
         return GameActionResult(true)
     }
 
@@ -157,7 +160,10 @@ class GameService(
             return GameActionResult(false, exception.message ?: "Invalid action")
         }
         return when (val result = game.submitMove(move)) {
-            MoveResult.Accepted -> GameActionResult(true)
+            MoveResult.Accepted -> {
+                gameRepository.save(game)
+                GameActionResult(true)
+            }
             is MoveResult.Rejected -> GameActionResult(false, result.reason.name)
         }
     }
@@ -171,8 +177,10 @@ class GameService(
         }
         val gemColor = parseColor(color)
             ?: return GameActionResult(false, "Unknown gem color")
-        return if (game.returnTokens(gemColor, amount)) GameActionResult(true)
-        else GameActionResult(false, "Cannot return these tokens")
+        return if (game.returnTokens(gemColor, amount)) {
+            gameRepository.save(game)
+            GameActionResult(true)
+        } else GameActionResult(false, "Cannot return these tokens")
     }
 
     fun selectNoble(gameId: String, playerId: String, nobleId: String): GameActionResult {
@@ -184,8 +192,10 @@ class GameService(
         }
         val id = try { NobleId(UUID.fromString(nobleId)) }
         catch (_: IllegalArgumentException) { return GameActionResult(false, "Invalid noble ID") }
-        return if (game.selectNoble(id)) GameActionResult(true)
-        else GameActionResult(false, "Noble cannot be selected")
+        return if (game.selectNoble(id)) {
+            gameRepository.save(game)
+            GameActionResult(true)
+        } else GameActionResult(false, "Noble cannot be selected")
     }
 
     private fun findGame(id: String): Game? = try {

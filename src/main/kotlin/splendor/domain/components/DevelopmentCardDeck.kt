@@ -5,7 +5,8 @@ import kotlin.random.Random
 class DevelopmentCardDeck(
     val level: CardLevel,
     cards: List<DevelopmentCard>,
-    random: Random = Random.Default
+    random: Random = Random.Default,
+    shuffle: Boolean = true
 ) {
     private val cards: MutableList<DevelopmentCard>
 
@@ -14,7 +15,7 @@ class DevelopmentCardDeck(
             "All cards in the deck must have the same level"
         }
 
-        this.cards = cards.shuffled(random).toMutableList()
+        this.cards = (if (shuffle) cards.shuffled(random) else cards).toMutableList()
     }
 
     fun draw(): DevelopmentCard? {
@@ -25,4 +26,6 @@ class DevelopmentCardDeck(
     fun isEmpty(): Boolean = cards.isEmpty()
 
     fun remainingCount(): Int = cards.size
+
+    fun getRemainingCards(): List<DevelopmentCard> = cards.toList()
 }

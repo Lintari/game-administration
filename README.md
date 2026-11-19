@@ -18,4 +18,10 @@ See [docs/architecture.puml](docs/architecture.puml) for the layer diagram. GUI 
 
 ## Data storage
 
-The configured player and game repositories are in-memory. Players, games, moves, and statistics are lost when the process exits; the GUI does not provide persistent storage. A minimal persistence extension would add SQLite-backed implementations of `PlayerRepository` and `GameRepository` in Infrastructure, with schema/mapping for players and complete game state (participants, table, decks, tokens, cards, phase, and move history). The service and presentation APIs can remain unchanged. This storage extension has not been implemented.
+SQLite JDBC stores application data in `data/splendor.db`; the directory and database are created automatically on first launch. The database file is ignored by Git. SQLite is embedded, so no separate database server is required.
+
+The schema is in `src/main/resources/db/schema.sql`. Its main tables are `players`, `games`, `game_players`, `cards`, `card_costs`, `nobles`, `noble_requirements`, `table_tokens`, `open_cards`, `deck_cards`, `participant_tokens`, `participant_cards`, `participant_nobles`, `turn_tokens`, `moves`, and `player_statistics`. Foreign keys connect game state and results to their players and game records.
+
+Every game save writes the game state, participants, card/token/noble locations, and move history in one transaction. The same transaction rebuilds aggregate statistics from finished game results, so retrying a save does not increment totals twice. `StatisticsService.recalculate()` can also rebuild the aggregate table on demand.
+
+To inspect the database in IntelliJ IDEA, open the Database tool window, add a data source, choose SQLite, and select `data/splendor.db`.
