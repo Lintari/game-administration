@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="87845091-0aa0-41a4-8385-5ed3d7febee2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/splendor/domain/identifiers/PlayerId.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/splendor/domain/players/Player.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/splendor/infrastructure/repositories/InMemoryPlayerRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.2952788033316402" />
+      <entry key="MS500" value="1.9778211908817598" />
+      <entry key="S2" value="3.656628883426357" />
+      <entry key="S5" value="4.804003403895532" />
+      <entry key="S10" value="5.346680458762295" />
+      <entry key="S30" value="5.768560144900437" />
+      <entry key="S60" value="5.893139507332352" />
+      <entry key="M2" value="6.104977319052061" />
+      <entry key="M5" value="8.176395015565188" />
+      <entry key="M10" value="16.098576576810487" />
+      <entry key="M15" value="26.707645970618596" />
+      <entry key="M30" value="56.14569001815496" />
+      <entry key="H1" value="89.30322334044035" />
+      <entry key="H2" value="115.01398176716054" />
+      <entry key="H4" value="131.15062852831284" />
+      <entry key="D1" value="146.650482106755" />
+      <entry key="W1" value="149.51612747604827" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.242514277547784" />
+      <entry key="MS500" value="1.9611809716116417" />
+      <entry key="S2" value="3.6485396484648365" />
+      <entry key="S5" value="4.799701797675369" />
+      <entry key="S10" value="5.344278640034193" />
+      <entry key="S30" value="5.767694621033693" />
+      <entry key="S60" value="5.892697066942969" />
+      <entry key="M2" value="6.104747350195777" />
+      <entry key="M5" value="8.176271217271868" />
+      <entry key="M10" value="16.09844075351313" />
+      <entry key="M15" value="26.707472197326005" />
+      <entry key="M30" value="56.14546960402014" />
+      <entry key="H1" value="89.30303197839297" />
+      <entry key="H2" value="115.01385361259393" />
+      <entry key="H4" value="131.15055411508231" />
+      <entry key="D1" value="146.6504680362582" />
+      <entry key="W1" value="149.5161254217326" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3MK6cHAK0Tx2X1X2oljZ8LIQHoO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "hw2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/lin/kotlin/game-administration",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-ac68fc9d2b05-intellij.indexing.shared.core-IU-263.7307.200" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="87845091-0aa0-41a4-8385-5ed3d7febee2" name="Changes" comment="" />
+      <created>1795086990014</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1795086990014</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
